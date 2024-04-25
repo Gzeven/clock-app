@@ -1,95 +1,93 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client"
+import { useState, useEffect } from "react";
+import styled from "styled-components";
+import CurrentTime from "./components/CurrentTime";
+import Quote from "./components/Quote";
+import TimeDetails from "./components/TimeDetails";
+import { fetchWorldTimeData } from "./api/WorldTimeApi";
+
+
+const Container = styled.div` // Define ContainerProps interface
+  display: flex;
+  flex-direction: column;
+  /* height: 100vh; Ensure the container takes up the full height of the viewport */
+  height: 100vh;
+`;
+
+
+const MainContent = styled.div`
+  /* flex: 1; */
+`;
+
+const SidebarBottom = styled.div<{ $isOpen: boolean }>`
+  height: ${({ $isOpen }) => ($isOpen ? "0" : "50%")};
+  overflow: hidden;
+  transition: height 0.8s ease-in-out;
+`;
+
+const SidebarTop = styled.div<{ $isOpen: boolean }>`
+  flex: ${({ $isOpen }) => ($isOpen ? "0" : "1")};
+  overflow: hidden;
+  transition: flex 0.8s ease-in-out;
+`;
 
 export default function Home() {
+  const [showQuote, setShowQuote] = useState(true);
+  const [showTimeDetails, setShowTimeDetails] = useState(true);
+  const [isDaytime, setIsDaytime] = useState(true);
+
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const data = await fetchWorldTimeData();
+  //       const hour = new Date(data.datetime).getHours();
+  //       const newIsDaytime = hour >= 5 && hour < 18;
+  //       setIsDaytime(newIsDaytime);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+  useEffect(() => {
+    const updateDaytimeStatus = () => {
+      const now = new Date();
+      const hour = now.getHours();
+
+      // Determine if it's daytime based on the current hour
+      const newIsDaytime = hour >= 5 && hour < 18;
+      setIsDaytime(newIsDaytime);
+    };
+
+    // Call the function initially
+    updateDaytimeStatus();
+
+    // Update every minute
+    const intervalId = setInterval(updateDaytimeStatus, 60000);
+
+    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+  }, []);
+
+  const toggleComponents = () => {
+    setShowQuote(!showQuote);
+    setShowTimeDetails(!showTimeDetails);
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    <Container className={isDaytime ? 'daytime' : 'nighttime'}>
+       
+      <SidebarTop $isOpen={!showTimeDetails}>
+        <Quote />
+      </SidebarTop>
+      <MainContent>
+        <CurrentTime location="Your Location" toggleComponents={toggleComponents} />
+      </MainContent>
+      <SidebarBottom $isOpen={showTimeDetails}>
+        <TimeDetails currentTime="Current Time" location="Your Location" />
+      </SidebarBottom>
+    </Container>
+    
   );
 }
