@@ -103,6 +103,7 @@ const CurrentTime: React.FC<CurrentTimeProps> = ({ location, toggleComponents })
   const [countryCode, setCountryCode] = useState('');
   const [isTimeDetailsExpanded, setIsTimeDetailsExpanded] = useState(false);
 
+
   const toggleTimeDetails = () => {
     setIsTimeDetailsExpanded(!isTimeDetailsExpanded);
     toggleComponents();
@@ -133,8 +134,10 @@ const CurrentTime: React.FC<CurrentTimeProps> = ({ location, toggleComponents })
         }
 
         // Fetch current location using IP-API
-        const response = await axios.get('http://ip-api.com/json/');
-        setCity(response.data.city);
+        const response = await axios.get('https://freeipapi.com/api/json/');
+        console.log(response);
+        
+        setCity(response.data.cityName);
         setCountryCode(response.data.countryCode);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -142,6 +145,7 @@ const CurrentTime: React.FC<CurrentTimeProps> = ({ location, toggleComponents })
     };
 
     fetchData();
+
 
     // Update current time every second
     const intervalId = setInterval(() => {
@@ -176,6 +180,7 @@ const CurrentTime: React.FC<CurrentTimeProps> = ({ location, toggleComponents })
       
         <Time><h1>{currentTime}</h1></Time>
         <Abbreviation>{abbreviation}</Abbreviation>
+  
       </TimeContainer>
       <LocationContainer>
         {city && <div><h3>In {city},</h3></div>}
