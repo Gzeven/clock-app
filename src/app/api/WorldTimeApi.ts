@@ -3,7 +3,7 @@ import { log } from "console";
 // api/worldTimeApi.ts
 export const fetchWorldTimeData = async () => {
     try {
-      const response = await fetch('http://worldtimeapi.org/api/ip');
+      const response = await fetch('https://worldtimeapi.org/api/ip');
       if (!response.ok) {
         throw new Error('Failed to fetch data from World Time API');
       }
