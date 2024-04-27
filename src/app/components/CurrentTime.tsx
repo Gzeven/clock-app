@@ -8,17 +8,20 @@ import ToggleButton from './ToggleButton';
 
 // Styled components for styling
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 6.1875rem 1.625rem 2.5rem;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: flex-start; */
+  /* gap: 1rem; */
+  /* padding: 6.1875rem 1.625rem 2.5rem; */
+  /* padding: 0 1.625rem; */
+  padding: 6.1875rem 1.625rem 0;;
   @media (min-width: 768px) {
     padding: 9.5625rem 4rem 4rem;
     gap: 0;
   }
   @media (min-width: 1024px) {
     padding: 3.5rem 10.3125rem;
+ display:flex;
  flex-direction: row;
  justify-content: space-between;
  align-items: flex-end;
@@ -135,8 +138,6 @@ const CurrentTime: React.FC<CurrentTimeProps> = ({ location, toggleComponents })
 
         // Fetch current location using IP-API
         const response = await axios.get('https://freeipapi.com/api/json/');
-        console.log(response);
-        
         setCity(response.data.cityName);
         setCountryCode(response.data.countryCode);
       } catch (error) {
@@ -172,7 +173,7 @@ const CurrentTime: React.FC<CurrentTimeProps> = ({ location, toggleComponents })
     <Container>
       <div>
       <GreetingContainer>
-        <Image src={icon} alt="Icon" width={0} height={0} />
+      {icon && <Image src={icon} alt="Icon" width={24} height={24} />}
         <Greeting><h4>{greeting}</h4></Greeting>
         <ExtraGreeting><h4>, it&apos;s currently</h4>, </ExtraGreeting>
       </GreetingContainer>

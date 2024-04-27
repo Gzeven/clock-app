@@ -6,6 +6,7 @@ import Image from 'next/image'
 
 
 const Button = styled.button`
+margin-top: 3rem;
   width: 115px;
   height: 39px;
   background-color: var(--white);
@@ -19,6 +20,7 @@ const Button = styled.button`
   @media (min-width: 768px) {
     width: 146px;
   height: 56px;
+  margin-top: 5rem;
   }
   @media (min-width: 1024px) {
  

@@ -10,25 +10,39 @@ import { fetchWorldTimeData } from "./api/WorldTimeApi";
 const Container = styled.div` // Define ContainerProps interface
   display: flex;
   flex-direction: column;
-  /* height: 100vh; Ensure the container takes up the full height of the viewport */
   height: 100vh;
 `;
 
 
 const MainContent = styled.div`
-  /* flex: 1; */
+  /* flex: 2; */
+  flex: 1;
+  @media (min-width: 768px) {
+  flex: 1;
+  }
+  @media (min-width: 1024px) {
+
+  }
+
 `;
 
 const SidebarBottom = styled.div<{ $isOpen: boolean }>`
-  height: ${({ $isOpen }) => ($isOpen ? "0" : "50%")};
+  height: ${({ $isOpen }) => ($isOpen ? "0" : "38%")};
   overflow: hidden;
   transition: height 0.8s ease-in-out;
+  @media (min-width: 768px) {
+  height: ${({ $isOpen }) => ($isOpen ? "0" : "42%")};
+  }
+  @media (min-width: 1024px) {
+    height: ${({ $isOpen }) => ($isOpen ? "0" : "50%")};
+  }
 `;
 
 const SidebarTop = styled.div<{ $isOpen: boolean }>`
   flex: ${({ $isOpen }) => ($isOpen ? "0" : "1")};
   overflow: hidden;
   transition: flex 0.8s ease-in-out;
+
 `;
 
 export default function Home() {
@@ -37,20 +51,6 @@ export default function Home() {
   const [isDaytime, setIsDaytime] = useState(true);
 
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const data = await fetchWorldTimeData();
-  //       const hour = new Date(data.datetime).getHours();
-  //       const newIsDaytime = hour >= 5 && hour < 18;
-  //       setIsDaytime(newIsDaytime);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
   useEffect(() => {
     const updateDaytimeStatus = () => {
       const now = new Date();
