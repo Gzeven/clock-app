@@ -8,12 +8,6 @@ import ToggleButton from './ToggleButton';
 
 // Styled components for styling
 const Container = styled.div`
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* align-items: flex-start; */
-  /* gap: 1rem; */
-  /* padding: 6.1875rem 1.625rem 2.5rem; */
-  /* padding: 0 1.625rem; */
   padding: 6.1875rem 1.625rem 0;;
   @media (min-width: 768px) {
     padding: 9.5625rem 4rem 4rem;
@@ -35,7 +29,6 @@ const GreetingContainer = styled.div`
     height: 24px;
     margin-right: 1.0625rem;
   }
-  /* align-items: center; */
 `;
 
 const Greeting = styled.div`

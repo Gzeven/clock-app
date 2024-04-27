@@ -8,7 +8,6 @@ import Refresh from '../../../public/assets/desktop/icon-refresh.svg'
 // Styled components for styling
 const Container = styled.div`
   display: flex;
-  /* flex-direction: column; */
   align-items: flex-start;
   justify-content: space-between;
   gap: 1.0625rem;

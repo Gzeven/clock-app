@@ -20,8 +20,6 @@ const Container = styled.div`
   grid-template-columns: 1fr; 
   grid-template-rows: 28px 28px 28px 28px; 
   gap: 1rem;
-  /* flex-direction: column; */
-  /* gap: 1rem; */
   background-color: ${getBackgroundColor};
   backdrop-filter: blur(1rem);
   color: ${getTimeBasedTextColor};
@@ -45,8 +43,6 @@ align-items: center;
 @media (min-width: 768px) {
 flex-direction: column;
 align-items: flex-start;
-/* gap: 0.5rem; */
-/* flex: 1; */
   }
   @media (min-width: 1024px) {
  gap: 9px;
