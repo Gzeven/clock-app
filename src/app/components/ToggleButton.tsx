@@ -22,7 +22,7 @@ margin-top: 3rem;
   height: 56px;
   margin-top: 5rem;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
  
   }
   
@@ -39,7 +39,7 @@ const ArrowIcon = styled(Image)<{ $isExpanded: boolean }>`
    width: 2.5rem;
    height: 2.5rem;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
  
   }
 `;
@@ -57,7 +57,7 @@ opacity: 50%;
 margin-left: 16px;
 font-size: 1rem;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
  
   }
 

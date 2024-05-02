@@ -129,28 +129,30 @@ body {
 .daytime {
   background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),
     url("/assets/mobile/bg-image-daytime.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 
   @media (min-width: 768px) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),
       url("/assets/tablet/bg-image-daytime.jpg");
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),
       url("/assets/desktop/bg-image-daytime.jpg");
   }
 }
 
 .nighttime {
-  background-repeat: no-repeat;
-  background-size: cover;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("/assets/mobile/bg-image-nighttime.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 
   @media (min-width: 768px) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
       url("/assets/tablet/bg-image-nighttime.jpg");
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
       url("/assets/desktop/bg-image-nighttime.jpg");
   }
@@ -167,7 +169,7 @@ h1 {
     line-height: 175px;
     letter-spacing: -4.375px;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     font-size: 12.5rem;
     line-height: 200px;
     letter-spacing: -5px;
@@ -183,7 +185,7 @@ h2 {
     font-size: 2.5rem;
     line-height: 48px;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     font-size: 3.5rem;
     line-height: 68px;
   }
@@ -201,7 +203,7 @@ h3 {
     line-height: 28px;
     letter-spacing: 3.6px;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     font-size: 1.5rem;
     line-height: 28px;
     letter-spacing: 4.8px;
@@ -220,7 +222,7 @@ h4 {
     line-height: 28px;
     letter-spacing: 3.6px;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     font-size: 1.25rem;
     line-height: 28px;
     letter-spacing: 4px;
@@ -247,7 +249,7 @@ h6 {
     font-size: 0.8125rem;
     letter-spacing: 2.6px;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     font-size: 0.9375rem;
     letter-spacing: 3px;
   }

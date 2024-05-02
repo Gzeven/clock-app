@@ -17,7 +17,7 @@ const Container = styled.div`
    padding: 5rem 4rem 0;
    gap: 1rem;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     padding: 3.5rem 10.3125rem 0;
   }
 `;

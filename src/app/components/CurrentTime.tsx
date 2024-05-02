@@ -8,14 +8,20 @@ import ToggleButton from './ToggleButton';
 
 // Styled components for styling
 const Container = styled.div`
-  padding: 6.1875rem 1.625rem 0;;
+display: flex;
+flex-direction: column;
+/* align-items: center; */
+justify-content: flex-end;
+height: 100%;
+  /* padding: 6.1875rem 1.625rem 2.5rem; */
   @media (min-width: 768px) {
-    padding: 9.5625rem 4rem 4rem;
-    gap: 0;
+    /* padding: 9.5625rem 4rem 4rem; */
+    /* padding: 0 4rem 4rem ; */
+    /* gap: 0; */
   }
-  @media (min-width: 1024px) {
-    padding: 3.5rem 10.3125rem;
- display:flex;
+  @media (min-width: 1280px) {
+    /* padding: 3.5rem 10.3125rem; */
+ /* display:flex; */
  flex-direction: row;
  justify-content: space-between;
  align-items: flex-end;
@@ -40,7 +46,7 @@ display: none;
 @media (min-width: 768px) {
   display: flex;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
  
   }
 `;
@@ -68,7 +74,7 @@ margin-left: 0.8125rem;
   margin-bottom: 1.4rem;
   font-size: 2rem;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
  
   }
 `;
@@ -78,9 +84,9 @@ display: flex;
   font-size: 16px;
   gap: 0.5rem;
   @media (min-width: 768px) {
-  margin-bottom: 5rem;
+  /* margin-bottom: 5rem; */
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
  margin-bottom: 0;
   }
 `;
