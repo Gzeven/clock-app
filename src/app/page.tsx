@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import CurrentTime from "./components/CurrentTime";
@@ -6,17 +6,14 @@ import Quote from "./components/Quote";
 import TimeDetails from "./components/TimeDetails";
 import { fetchWorldTimeData } from "./api/WorldTimeApi";
 
-
-const Container = styled.div` // Define ContainerProps interface
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
 `;
 
-
 const MainContent = styled.div`
-  /* flex: 2; */
-  flex:1;
+  flex: 1;
   padding-inline: 1.625rem;
   padding-bottom: 2.5rem;
   @media (min-width: 768px) {
@@ -24,30 +21,23 @@ const MainContent = styled.div`
     padding-bottom: 4rem;
   }
   @media (min-width: 1280px) {
-  padding-inline: 10.3125rem;
-  padding-bottom: 3.5rem;
+    padding-inline: 10.3125rem;
+    padding-bottom: 3.5rem;
   }
-
 `;
 
 const SidebarBottom = styled.div<{ $isOpen: boolean; $isDaytime: boolean }>`
   height: ${({ $isOpen }) => ($isOpen ? "0" : "38%")};
   overflow: hidden;
   transition: height 0.8s ease-in-out;
-  background-color: ${({ $isDaytime }) => ($isDaytime ? 'hsla(255, 255%, 255%, 0.75)' : 'hsla(0, 0%, 0%, 0.75)')};
-  color: ${({ $isDaytime }) => ($isDaytime ? 'var(--black)' : 'var(--white)')};
+  background-color: ${({ $isDaytime }) =>
+    $isDaytime ? "hsla(255, 255%, 255%, 0.75)" : "hsla(0, 0%, 0%, 0.75)"};
+  color: ${({ $isDaytime }) => ($isDaytime ? "var(--black)" : "var(--white)")};
   backdrop-filter: blur(1rem);
-   display: flex;
+  display: flex;
   align-items: center;
-  /* width: 100%; */
-  /* justify-content: spa; */
-  /* width: 100%;  */
-  /* padding-inline: 1.625rem; */
   @media (min-width: 768px) {
-  height: ${({ $isOpen }) => ($isOpen ? "0" : "42%")};
-  /* display: flex; */
-  /* padding-inline: 4rem; */
-  /* justify-content: flex-start; */
+    height: ${({ $isOpen }) => ($isOpen ? "0" : "42%")};
   }
   @media (min-width: 1280px) {
     height: ${({ $isOpen }) => ($isOpen ? "0" : "50%")};
@@ -58,14 +48,12 @@ const SidebarTop = styled.div<{ $isOpen: boolean }>`
   flex: ${({ $isOpen }) => ($isOpen ? "0" : "1")};
   overflow: hidden;
   transition: flex 0.8s ease-in-out;
-
 `;
 
 export default function Home() {
   const [showQuote, setShowQuote] = useState(true);
   const [showTimeDetails, setShowTimeDetails] = useState(true);
   const [isDaytime, setIsDaytime] = useState(true);
-
 
   useEffect(() => {
     const updateDaytimeStatus = () => {
@@ -92,18 +80,19 @@ export default function Home() {
   };
 
   return (
-    <Container className={isDaytime ? 'daytime' : 'nighttime'}>
-       
+    <Container className={isDaytime ? "daytime" : "nighttime"}>
       <SidebarTop $isOpen={!showTimeDetails}>
         <Quote />
       </SidebarTop>
       <MainContent>
-        <CurrentTime location="Your Location" toggleComponents={toggleComponents} />
+        <CurrentTime
+          location="Your Location"
+          toggleComponents={toggleComponents}
+        />
       </MainContent>
       <SidebarBottom $isOpen={showTimeDetails} $isDaytime={isDaytime}>
-        <TimeDetails currentTime="Current Time" location="Your Location" />
+        <TimeDetails $isDaytime={isDaytime}/>
       </SidebarBottom>
     </Container>
-    
   );
 }

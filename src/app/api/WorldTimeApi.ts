@@ -1,4 +1,3 @@
-import { log } from "console";
 
 // api/worldTimeApi.ts
 export const fetchWorldTimeData = async () => {
