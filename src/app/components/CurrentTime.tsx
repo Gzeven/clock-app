@@ -116,7 +116,7 @@ const CurrentTime: React.FC<CurrentTimeProps> = ({
         }
 
         // Determine the icon based on the time of day
-        if (hour >= 6 && hour < 17) {
+        if (hour >= 6 && hour < 18) {
           setIcon("/assets/desktop/icon-sun.svg");
         } else {
           setIcon("/assets/desktop/icon-moon.svg");
