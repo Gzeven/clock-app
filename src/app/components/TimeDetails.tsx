@@ -84,20 +84,20 @@ const TimeDetails: React.FC<{$isDaytime: boolean }> = ({$isDaytime }) => {
   return (
     <Container>
       <TimeDetailsContent $isDaytime={$isDaytime} >
-        <h6>Current TimeZone</h6>
+        <p>Current TimeZone</p>
         <h2>{timezone}</h2>
       </TimeDetailsContent>
       <TimeDetailsContent $isDaytime={$isDaytime}>
-        <h6>Day of the Year</h6>
+        <p>Day of the Year</p>
         <h2>{dayOfYear}</h2>
       </TimeDetailsContent>
 
       <TimeDetailsContent $isDaytime={$isDaytime}>
-        <h6>Day of the Week</h6>
+        <p>Day of the Week</p>
         <h2>{dayOfWeek}</h2>
       </TimeDetailsContent>
       <TimeDetailsContent $isDaytime={$isDaytime}>
-        <h6>Week Number</h6>
+        <p>Week Number</p>
         <h2>{weekNumber}</h2>
       </TimeDetailsContent>
     </Container>

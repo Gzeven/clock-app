@@ -108,7 +108,7 @@
 .logo {
   position: relative;
 }
-/* Enable hover only on non-touch devices */
+/* Enable hover only on non-touch devices
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
     background: rgba(var(--card-rgb), 0.1);
@@ -227,4 +227,4 @@
   to {
     transform: rotate(0deg);
   }
-}
+} 
