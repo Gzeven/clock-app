@@ -34,6 +34,8 @@ const TimeDetailsContent = styled.div<{$isDaytime: boolean }>`
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+ 
+  
   @media (min-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
@@ -84,20 +86,20 @@ const TimeDetails: React.FC<{$isDaytime: boolean }> = ({$isDaytime }) => {
   return (
     <Container>
       <TimeDetailsContent $isDaytime={$isDaytime} >
-        <p>Current TimeZone</p>
+        <h6>Current TimeZone</h6>
         <h2>{timezone}</h2>
       </TimeDetailsContent>
       <TimeDetailsContent $isDaytime={$isDaytime}>
-        <p>Day of the Year</p>
+        <h6>Day of the Year</h6>
         <h2>{dayOfYear}</h2>
       </TimeDetailsContent>
 
       <TimeDetailsContent $isDaytime={$isDaytime}>
-        <p>Day of the Week</p>
+        <h6>Day of the Week</h6>
         <h2>{dayOfWeek}</h2>
       </TimeDetailsContent>
       <TimeDetailsContent $isDaytime={$isDaytime}>
-        <p>Week Number</p>
+        <h6>Week Number</h6>
         <h2>{weekNumber}</h2>
       </TimeDetailsContent>
     </Container>
