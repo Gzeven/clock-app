@@ -33,8 +33,8 @@ const SidebarBottom = styled.div<{ $isOpen: boolean; $isDaytime: boolean }>`
   background-color: ${({ $isDaytime }) =>
     $isDaytime ? "hsla(255, 255%, 255%, 0.75)" : "hsla(0, 0%, 0%, 0.75)"};
   color: ${({ $isDaytime }) => ($isDaytime ? "var(--black)" : "var(--white)")};
-  backdrop-filter: blur(1rem);
-  -webkit-backdrop-filter: blur(1rem);
+  backdrop-filter: blur(20.3871px);
+  -webkit-backdrop-filter: blur(20.3871px);
   display: flex;
   align-items: center;
   @media (min-width: 768px) {
