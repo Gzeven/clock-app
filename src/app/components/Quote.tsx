@@ -35,9 +35,20 @@ const Button = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.6s ease;
   img {
     width: 1.041875rem;
     height: 1.041875rem;
+    
+  }
+  @media(hover: hover) and (pointer: fine) {
+    &:hover {
+    opacity: 1; // Change the image color to white on hover
+  }
+  }
+  @media (min-width: 768px) {
+    margin-top: 0.4rem;
   }
 
 `;
@@ -78,7 +89,7 @@ const Quote: React.FC<QuoteProps> = () => {
         </AuthorText>
       </div>
       <Button onClick={handleRefreshClick}>
-        <Image src={Refresh} alt="Play button" width="0" height="0" />{" "}
+        <Image src={Refresh} alt="Get new quote" width="0" height="0" />{" "}
       </Button>
     </Container>
   );

@@ -20,6 +20,11 @@ const Button = styled.button`
     height: 3.5rem;
     margin-top: 5rem;
   }
+  @media(hover: hover) and (pointer: fine) {
+    &:hover img {
+    opacity:0.5; // Change the image color to white on hover
+  }
+  }
 `;
 
 const ArrowIcon = styled(Image)<{ $isExpanded: boolean }>`
@@ -29,11 +34,14 @@ const ArrowIcon = styled(Image)<{ $isExpanded: boolean }>`
   height: 2rem;
   transform: ${({ $isExpanded }) =>
     $isExpanded ? "rotate(0deg)" : "rotate(180deg)"};
-  transition: transform 0.8s ease;
+  transition: all 0.8s ease;
+  
   @media (min-width: 768px) {
     width: 2.5rem;
     height: 2.5rem;
   }
+
+
 `;
 
 const Text = styled.span`
