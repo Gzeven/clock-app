@@ -65,14 +65,16 @@ const Quote: React.FC<QuoteProps> = () => {
 
   const fetchRandomQuote = async () => {
     try {
-      const response = await axios.get("https://api.quotable.io/random");
-      const { content, author } = response.data;
-      setQuote(content);
+      const response = await axios.get("https://quotes-api-self.vercel.app/quote");
+      const { quote, author } = response.data;
+      setQuote(quote);
       setAuthor(author);
     } catch (error) {
       console.error("Error fetching random quote:", error);
     }
   };
+
+
 
   const handleRefreshClick = () => {
     fetchRandomQuote();

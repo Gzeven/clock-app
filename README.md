@@ -51,7 +51,7 @@ Users should be able to:
 - [Next.js](https://nextjs.org/) - React framework
 - [Styled Components](https://styled-components.com/) - For styles
 - [World Time API](https://worldtimeapi.org/) - For the current time
-- [Random Quotes API](https://github.com/lukePeavey/quotable) - For a random quote
+- [Quotes API](https://github.com/well300/quotes-api) - For a random quote
 
 
 ### Useful resources
