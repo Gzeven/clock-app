@@ -4,7 +4,6 @@ import styled from "styled-components";
 import CurrentTime from "./components/CurrentTime";
 import Quote from "./components/Quote";
 import TimeDetails from "./components/TimeDetails";
-import { fetchWorldTimeData } from "./api/ApiCalls";
 
 const Container = styled.div`
   display: flex;
