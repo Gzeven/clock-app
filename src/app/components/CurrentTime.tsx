@@ -52,6 +52,7 @@ const LocationContainer = styled.div`
 `;
 
 interface CurrentTimeProps {
+  location: string;
   toggleComponents: () => void;
 }
 
