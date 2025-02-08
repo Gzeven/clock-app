@@ -2,10 +2,9 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styled from "styled-components";
-import axios from "axios";
 import Refresh from "../../../public/assets/desktop/icon-refresh.svg";
+import { fetchRandomQuote } from "../api/ApiCalls"; // Import API function
 
-// Styled components for styling
 const Container = styled.div`
   display: flex;
   align-items: flex-start;
@@ -40,44 +39,31 @@ const Button = styled.button`
   img {
     width: 1.041875rem;
     height: 1.041875rem;
-    
   }
-  @media(hover: hover) and (pointer: fine) {
+  @media (hover: hover) and (pointer: fine) {
     &:hover {
-    opacity: 1; // Change the image color to white on hover
-  }
+      opacity: 1;
+    }
   }
   @media (min-width: 768px) {
     margin-top: 0.4rem;
   }
-
 `;
 
-interface QuoteProps {}
-
-const Quote: React.FC<QuoteProps> = () => {
+const Quote: React.FC = () => {
   const [quote, setQuote] = useState("");
   const [author, setAuthor] = useState("");
 
   useEffect(() => {
-    fetchRandomQuote();
+    getQuote();
   }, []);
 
-  const fetchRandomQuote = async () => {
-    try {
-      const response = await axios.get("https://quotes-api-self.vercel.app/quote");
-      const { quote, author } = response.data;
-      setQuote(quote);
-      setAuthor(author);
-    } catch (error) {
-      console.error("Error fetching random quote:", error);
+  const getQuote = async () => {
+    const data = await fetchRandomQuote();
+    if (data) {
+      setQuote(data.quote);
+      setAuthor(data.author);
     }
-  };
-
-
-
-  const handleRefreshClick = () => {
-    fetchRandomQuote();
   };
 
   return (
@@ -90,8 +76,8 @@ const Quote: React.FC<QuoteProps> = () => {
           <h5>{author}</h5>
         </AuthorText>
       </div>
-      <Button onClick={handleRefreshClick}>
-        <Image src={Refresh} alt="Get new quote" width="0" height="0" />{" "}
+      <Button onClick={getQuote}>
+        <Image src={Refresh} alt="Get new quote" width="0" height="0" />
       </Button>
     </Container>
   );

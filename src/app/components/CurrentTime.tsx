@@ -2,18 +2,15 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styled from "styled-components";
-import { fetchWorldTimeData } from "../api/WorldTimeApi";
-import axios from "axios";
+import { getLocation } from "../api/ApiCalls";
 import ToggleButton from "./ToggleButton";
 
-// Styled components for styling
+// Styled components
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   height: 100%;
-  @media (min-width: 768px) {
-  }
   @media (min-width: 1280px) {
     flex-direction: row;
     justify-content: space-between;
@@ -23,6 +20,7 @@ const Container = styled.div`
 
 const GreetingContainer = styled.div`
   display: flex;
+  /* align-items: center; */
   img {
     width: 1.5rem;
     height: 1.5rem;
@@ -30,15 +28,8 @@ const GreetingContainer = styled.div`
   }
 `;
 
-const Greeting = styled.div``;
-
-const ExtraGreeting = styled.div`
-  display: none;
-  @media (min-width: 768px) {
-    display: flex;
-  }
-  @media (min-width: 1280px) {
-  }
+const Greeting = styled.h4`
+  margin: 0;
 `;
 
 const TimeContainer = styled.div`
@@ -46,25 +37,9 @@ const TimeContainer = styled.div`
   align-items: flex-end;
 `;
 
-const Time = styled.div`
-  font-size: 1.25rem;
+const Time = styled.h1`
+  /* font-size: 1.25rem; */
   margin-right: 5px;
-`;
-
-const Abbreviation = styled.div`
-  font-weight: 300;
-  font-size: 0.9375rem;
-  line-height: 28px;
-  text-transform: uppercase;
-  color: var(--white);
-  margin-bottom: 0.3rem;
-  margin-left: 0.8125rem;
-  @media (min-width: 768px) {
-    margin-bottom: 1.4rem;
-    font-size: 2rem;
-  }
-  @media (min-width: 1280px) {
-  }
 `;
 
 const LocationContainer = styled.div`
@@ -72,85 +47,56 @@ const LocationContainer = styled.div`
   font-size: 1rem;
   gap: 0.5rem;
   @media (min-width: 1280px) {
-    margin-bottom: 0;
+     margin-bottom: 0;
   }
 `;
 
 interface CurrentTimeProps {
-  location: string;
-  toggleComponents: () => void; // Function to toggle TimeDetails component
+  toggleComponents: () => void;
 }
 
-const CurrentTime: React.FC<CurrentTimeProps> = ({
-  location,
-  toggleComponents,
-}) => {
+const CurrentTime: React.FC<CurrentTimeProps> = ({ toggleComponents }) => {
   const [currentTime, setCurrentTime] = useState("");
-  const [abbreviation, setAbbreviation] = useState("");
   const [greeting, setGreeting] = useState("");
   const [icon, setIcon] = useState("");
   const [city, setCity] = useState("");
   const [countryCode, setCountryCode] = useState("");
   const [isTimeDetailsExpanded, setIsTimeDetailsExpanded] = useState(false);
 
-  const toggleTimeDetails = () => {
-    setIsTimeDetailsExpanded(!isTimeDetailsExpanded);
-    toggleComponents();
-  };
-
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchWorldTimeData();
-        const hour = new Date(data.datetime).getHours();
-        setCurrentTime(data.datetime.slice(11, 16)); // Extract hours and minutes from datetime
-        setAbbreviation(data.abbreviation);
-
-        // Determine the greeting based on the time of day
-        if (hour >= 5 && hour < 12) {
-          setGreeting("Good morning");
-        } else if (hour >= 12 && hour < 18) {
-          setGreeting("Good afternoon");
-        } else {
-          setGreeting("Good evening");
-        }
-
-        // Determine the icon based on the time of day
-        if (hour >= 6 && hour < 18) {
-          setIcon("/assets/desktop/icon-sun.svg");
-        } else {
-          setIcon("/assets/desktop/icon-moon.svg");
-        }
-
-        // Fetch current location using IP-API
-        const response = await axios.get("https://freeipapi.com/api/json/");
-        setCity(response.data.cityName);
-        setCountryCode(response.data.countryCode);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+    // Fetch location data
+    const fetchLocation = async () => {
+      const location = await getLocation();
+      setCity(location.city);
+      setCountryCode(location.countryCode);
     };
 
-    fetchData();
+    fetchLocation();
 
-    // Update current time every second
-    const intervalId = setInterval(() => {
+    // Function to update time and greeting
+    const updateTimeAndGreeting = () => {
       const now = new Date();
-      const hours = String(now.getHours()).padStart(2, "0");
+      const hours = now.getHours();
       const minutes = String(now.getMinutes()).padStart(2, "0");
+
       setCurrentTime(`${hours}:${minutes}`);
 
-      // Check if it's 6 o'clock and update greeting and icon accordingly
-      if (hours === "06") {
+      if (hours >= 5 && hours < 12) {
         setGreeting("Good morning");
         setIcon("/assets/desktop/icon-sun.svg");
-      } else if (hours === "18") {
+      } else if (hours >= 12 && hours < 18) {
+        setGreeting("Good afternoon");
+        setIcon("/assets/desktop/icon-sun.svg");
+      } else {
         setGreeting("Good evening");
         setIcon("/assets/desktop/icon-moon.svg");
       }
-    }, 1000);
+    };
 
-    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+    updateTimeAndGreeting();
+    const intervalId = setInterval(updateTimeAndGreeting, 1000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
@@ -158,35 +104,22 @@ const CurrentTime: React.FC<CurrentTimeProps> = ({
       <div>
         <GreetingContainer>
           {icon && <Image src={icon} alt="Icon" width={24} height={24} />}
-          <Greeting>
-            <h4>{greeting}</h4>
-          </Greeting>
-          <ExtraGreeting>
-            <h4>, it&apos;s currently</h4>,{" "}
-          </ExtraGreeting>
+          <Greeting>{greeting}, its currently</Greeting>
         </GreetingContainer>
         <TimeContainer>
-          <Time>
-            <h1>{currentTime}</h1>
-          </Time>
-          <Abbreviation>{abbreviation}</Abbreviation>
+          <Time>{currentTime}</Time>
         </TimeContainer>
         <LocationContainer>
-          {city && (
-            <div>
-              <h3>In {city},</h3>
-            </div>
-          )}
-          {countryCode && (
-            <div>
-              <h3>{countryCode}</h3>
-            </div>
-          )}
+          {city && <h3>In {city},</h3>}
+          {countryCode && <h3>{countryCode}</h3>}
         </LocationContainer>
       </div>
       <ToggleButton
         $isExpanded={isTimeDetailsExpanded}
-        onClick={toggleTimeDetails}
+        onClick={() => {
+          setIsTimeDetailsExpanded(!isTimeDetailsExpanded);
+          toggleComponents();
+        }}
         toggleComponents={toggleComponents}
       />
     </Container>

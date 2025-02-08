@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { fetchWorldTimeData } from "../api/WorldTimeApi";
+import { getLocation } from "../api/ApiCalls";
 
 // Styled components for styling
 const Container = styled.div`
@@ -21,60 +21,56 @@ const Container = styled.div`
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 105px 105px;
     margin: 0 10.3125rem;
-
-    --gap: 5.875rem;
-    --line-offset: calc(var(--gap) / 2);
-    --line-thickness: 1px;
-    overflow: hidden;
   }
 `;
 
-const TimeDetailsContent = styled.div<{$isDaytime: boolean }>`
+const TimeDetailsContent = styled.div<{ $isDaytime: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
- 
-  
+
   @media (min-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
   }
-  @media (min-width: 1280px) {
-    position: relative;
-    &:before,
-    &:after {
-      content: "";
-      position: absolute;
-       background-color: ${({ $isDaytime }) =>
-    $isDaytime ? "hsla(0,0%,18.8%, 0.25)" : "hsla(0, 100%, 100%, 0.25);"};
-      z-index: 1;
-    }
-
-    &:before {
-      inline-size: var(--line-thickness);
-      block-size: 145%;
-      inset-block-start: 0;
-      inset-inline-start: calc(var(--line-offset) * -2);
-    }
-  }
 `;
 
-
-const TimeDetails: React.FC<{$isDaytime: boolean }> = ({$isDaytime }) => {
-  const [timezone, setTimezone] = useState("");
-  const [dayOfYear, setDayOfYear] = useState("");
-  const [dayOfWeek, setDayOfWeek] = useState("");
-  const [weekNumber, setWeekNumber] = useState("");
+const TimeDetails: React.FC<{ $isDaytime: boolean }> = ({ $isDaytime }) => {
+  const [timezone, setTimezone] = useState<string>("");
+  const [dayOfYear, setDayOfYear] = useState<number>(0);
+  const [dayOfWeek, setDayOfWeek] = useState<number>(0);
+  const [weekNumber, setWeekNumber] = useState<number>(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchWorldTimeData();
-        setTimezone(data.timezone);
-        setDayOfYear(data.day_of_year.toString());
-        setDayOfWeek(data.day_of_week.toString());
-        setWeekNumber(data.week_number.toString());
+        // Fetch user location
+        const locationData = await getLocation();
+        const userTimezone = locationData.timeZone;
+        setTimezone(userTimezone);
+
+        // Get current date
+        const now = new Date();
+
+        // Get day of the year
+        const startOfYear = new Date(now.getFullYear(), 0, 0);
+        const diff = now.getTime() - startOfYear.getTime();
+        const oneDay = 1000 * 60 * 60 * 24;
+        const dayOfYear = Math.floor(diff / oneDay);
+
+        // Get day of the week (0 = Sunday, 1 = Monday, etc.)
+        const dayOfWeek = now.getDay();
+
+        // Get week number
+        const firstDayOfYear = new Date(now.getFullYear(), 0, 1);
+        const pastDays = (now.getTime() - firstDayOfYear.getTime()) / oneDay;
+        const weekNumber = Math.ceil((pastDays + firstDayOfYear.getDay() + 1) / 7);
+
+        // Set state
+        setDayOfYear(dayOfYear);
+        setDayOfWeek(dayOfWeek);
+        setWeekNumber(weekNumber);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -85,7 +81,7 @@ const TimeDetails: React.FC<{$isDaytime: boolean }> = ({$isDaytime }) => {
 
   return (
     <Container>
-      <TimeDetailsContent $isDaytime={$isDaytime} >
+      <TimeDetailsContent $isDaytime={$isDaytime}>
         <h6>Current TimeZone</h6>
         <h2>{timezone}</h2>
       </TimeDetailsContent>
@@ -93,7 +89,6 @@ const TimeDetails: React.FC<{$isDaytime: boolean }> = ({$isDaytime }) => {
         <h6>Day of the Year</h6>
         <h2>{dayOfYear}</h2>
       </TimeDetailsContent>
-
       <TimeDetailsContent $isDaytime={$isDaytime}>
         <h6>Day of the Week</h6>
         <h2>{dayOfWeek}</h2>
