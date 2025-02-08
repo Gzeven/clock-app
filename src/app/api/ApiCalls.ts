@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getLocation = async () => {
   try {
-    const response = await axios.get("http://ip-api.com/json/");
+    const response = await axios.get("https://ip-api.com/json");
     console.log(response);
     
     return {
