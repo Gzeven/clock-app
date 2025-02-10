@@ -1,21 +1,5 @@
 import axios from 'axios';
 
-export const getLocation = async () => {
-  try {
-    const response = await axios.get("https://ip-api.com/json");
-    console.log(response);
-    
-    return {
-      city: response.data.city,
-      countryCode: response.data.countryCode,
-      timeZone: response.data.timezone,
-
-    };
-  } catch (error) {
-    console.error("Error fetching location:", error);
-    return { city: "Unknown", countryCode: "??", timeZone: "Unknown" };
-  }
-};
 
 export const fetchRandomQuote = async () => {
   try {
@@ -24,6 +8,24 @@ export const fetchRandomQuote = async () => {
   } catch (error) {
     console.error("Error fetching random quote:", error);
     return null; // Handle errors gracefully
+  }
+};
+
+
+export const getLocation = async () => {
+  try {
+    const response = await fetch("/api/location");
+    if (!response.ok) throw new Error("Failed to fetch location");
+
+    const data = await response.json();
+    return {
+      city: data.city,
+      countryCode: data.country,
+      timeZone: data.timezone,
+    };
+  } catch (error) {
+    console.error("Error fetching location:", error);
+    return { city: "Unknown", countryCode: "??", timeZone: "Unknown" };
   }
 };
   

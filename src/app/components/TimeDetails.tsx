@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getLocation } from "../api/ApiCalls";
 
-// Styled components for styling
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -50,24 +49,19 @@ const TimeDetails: React.FC<{ $isDaytime: boolean }> = ({ $isDaytime }) => {
         const userTimezone = locationData.timeZone;
         setTimezone(userTimezone);
 
-        // Get current date
         const now = new Date();
 
-        // Get day of the year
         const startOfYear = new Date(now.getFullYear(), 0, 0);
         const diff = now.getTime() - startOfYear.getTime();
         const oneDay = 1000 * 60 * 60 * 24;
         const dayOfYear = Math.floor(diff / oneDay);
 
-        // Get day of the week (0 = Sunday, 1 = Monday, etc.)
         const dayOfWeek = now.getDay();
 
-        // Get week number
         const firstDayOfYear = new Date(now.getFullYear(), 0, 1);
         const pastDays = (now.getTime() - firstDayOfYear.getTime()) / oneDay;
         const weekNumber = Math.ceil((pastDays + firstDayOfYear.getDay() + 1) / 7);
 
-        // Set state
         setDayOfYear(dayOfYear);
         setDayOfWeek(dayOfWeek);
         setWeekNumber(weekNumber);

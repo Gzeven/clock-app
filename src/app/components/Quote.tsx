@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import Refresh from "../../../public/assets/desktop/icon-refresh.svg";
-import { fetchRandomQuote } from "../api/ApiCalls"; // Import API function
+import { fetchRandomQuote } from "../api/ApiCalls"; 
 
 const Container = styled.div`
   display: flex;

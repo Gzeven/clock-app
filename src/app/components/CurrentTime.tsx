@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { getLocation } from "../api/ApiCalls";
 import ToggleButton from "./ToggleButton";
 
-// Styled components
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -20,7 +19,6 @@ const Container = styled.div`
 
 const GreetingContainer = styled.div`
   display: flex;
-  /* align-items: center; */
   img {
     width: 1.5rem;
     height: 1.5rem;
@@ -38,7 +36,6 @@ const TimeContainer = styled.div`
 `;
 
 const Time = styled.h1`
-  /* font-size: 1.25rem; */
   margin-right: 5px;
 `;
 
@@ -65,7 +62,6 @@ const CurrentTime: React.FC<CurrentTimeProps> = ({ toggleComponents }) => {
   const [isTimeDetailsExpanded, setIsTimeDetailsExpanded] = useState(false);
 
   useEffect(() => {
-    // Fetch location data
     const fetchLocation = async () => {
       const location = await getLocation();
       setCity(location.city);
@@ -74,7 +70,6 @@ const CurrentTime: React.FC<CurrentTimeProps> = ({ toggleComponents }) => {
 
     fetchLocation();
 
-    // Function to update time and greeting
     const updateTimeAndGreeting = () => {
       const now = new Date();
       const hours = now.getHours();
