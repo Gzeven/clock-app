@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getLocation } from "../api/ApiCalls";
+import { fetchLocation } from "../api/ApiCalls";
 
 const Container = styled.div`
   display: grid;
@@ -45,12 +45,13 @@ const TimeDetails: React.FC<{ $isDaytime: boolean }> = ({ $isDaytime }) => {
     const fetchData = async () => {
       try {
         // Fetch user location
-        const locationData = await getLocation();
-        const userTimezone = locationData.timeZone;
+        const locationData = await fetchLocation();
+        const userTimezone = locationData.timezone;
         setTimezone(userTimezone);
 
         const now = new Date();
-
+        console.log(now);
+        
         const startOfYear = new Date(now.getFullYear(), 0, 0);
         const diff = now.getTime() - startOfYear.getTime();
         const oneDay = 1000 * 60 * 60 * 24;

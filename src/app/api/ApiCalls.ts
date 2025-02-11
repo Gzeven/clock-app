@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 export const fetchRandomQuote = async () => {
   try {
     const response = await axios.get("https://quotes-api-self.vercel.app/quote");
@@ -11,21 +10,18 @@ export const fetchRandomQuote = async () => {
   }
 };
 
-
-export const getLocation = async () => {
+export const fetchLocation = async () => {
   try {
-    const response = await fetch("/api/location");
-    if (!response.ok) throw new Error("Failed to fetch location");
-
-    const data = await response.json();
-    return {
-      city: data.city,
-      countryCode: data.country,
-      timeZone: data.timezone,
-    };
+    const token = process.env.NEXT_PUBLIC_IPINFO_TOKEN;
+    const response = await axios.get(`https://ipinfo.io?token=${token}`);
+    console.log(response.data);
+    return response.data; // Returns { quote, author }
   } catch (error) {
-    console.error("Error fetching location:", error);
-    return { city: "Unknown", countryCode: "??", timeZone: "Unknown" };
+    console.error("Error fetching random quote:", error);
+    return null; // Handle errors gracefully
   }
 };
-  
+
+
+
+

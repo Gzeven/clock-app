@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styled from "styled-components";
-import { getLocation } from "../api/ApiCalls";
+import { fetchLocation } from "../api/ApiCalls";
 import ToggleButton from "./ToggleButton";
+
 
 const Container = styled.div`
   display: flex;
@@ -61,14 +62,17 @@ const CurrentTime: React.FC<CurrentTimeProps> = ({ toggleComponents }) => {
   const [countryCode, setCountryCode] = useState("");
   const [isTimeDetailsExpanded, setIsTimeDetailsExpanded] = useState(false);
 
-  useEffect(() => {
-    const fetchLocation = async () => {
-      const location = await getLocation();
-      setCity(location.city);
-      setCountryCode(location.countryCode);
+    const getCityandCountry = async () => {
+      const data = await fetchLocation();
+      if (data) {
+        setCity(data.city);
+        setCountryCode(data.country);
+      }
     };
 
-    fetchLocation();
+  useEffect(() => {
+
+    getCityandCountry();
 
     const updateTimeAndGreeting = () => {
       const now = new Date();
@@ -94,6 +98,7 @@ const CurrentTime: React.FC<CurrentTimeProps> = ({ toggleComponents }) => {
 
     return () => clearInterval(intervalId);
   }, []);
+
 
   return (
     <Container>
