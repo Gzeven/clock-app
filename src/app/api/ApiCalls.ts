@@ -12,7 +12,7 @@ export const fetchRandomQuote = async () => {
 
 export const fetchLocation = async () => {
   try {
-    const response = await axios.get("https://ipinfo.io/?callback=callback&token=a48cb5037f6e2a");
+    const response = await axios.get("http://ip-api.com/json");
     return response.data;
   } catch (error) {
     console.error("Error fetching random quote:", error);
