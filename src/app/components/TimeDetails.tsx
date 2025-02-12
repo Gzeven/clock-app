@@ -44,7 +44,6 @@ const TimeDetails: React.FC<{ $isDaytime: boolean }> = ({ $isDaytime }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch user location
         const locationData = await fetchLocation();
         const userTimezone = locationData.timezone;
         setTimezone(userTimezone);

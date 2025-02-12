@@ -3,10 +3,10 @@ import axios from 'axios';
 export const fetchRandomQuote = async () => {
   try {
     const response = await axios.get("https://quotes-api-self.vercel.app/quote");
-    return response.data; // Returns { quote, author }
+    return response.data;
   } catch (error) {
     console.error("Error fetching random quote:", error);
-    return null; // Handle errors gracefully
+    return null; 
   }
 };
 
