@@ -48,9 +48,7 @@ const TimeDetails: React.FC<{ $isDaytime: boolean }> = ({ $isDaytime }) => {
         const userTimezone = locationData.timezone;
         setTimezone(userTimezone);
 
-        const now = new Date();
-        console.log(now);
-        
+        const now = new Date();    
         const startOfYear = new Date(now.getFullYear(), 0, 0);
         const diff = now.getTime() - startOfYear.getTime();
         const oneDay = 1000 * 60 * 60 * 24;

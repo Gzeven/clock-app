@@ -60,18 +60,17 @@ export default function Home() {
       const now = new Date();
       const hour = now.getHours();
 
-      // Determine if it's daytime based on the current hour
       const newIsDaytime = hour >= 5 && hour < 18;
       setIsDaytime(newIsDaytime);
     };
 
-    // Call the function initially
+   
     updateDaytimeStatus();
 
-    // Update every minute
+   
     const intervalId = setInterval(updateDaytimeStatus, 60000);
 
-    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+    return () => clearInterval(intervalId); 
   }, []);
 
   const toggleComponents = () => {
