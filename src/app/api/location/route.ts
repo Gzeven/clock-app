@@ -24,7 +24,7 @@ import { NextResponse } from "next/server";
 export async function GET(req: Request) {
   const ip =
     req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown"; // Get user's IP  
-  const token = process.env.IPINFO_TOKEN;
+  const token = process.env.NEXT_PUBLIC_IPINFO_TOKEN;
 
   if (!token) {
     console.error("❌ Missing IPINFO_TOKEN");
@@ -36,6 +36,9 @@ export async function GET(req: Request) {
   try {
     // Use the user's actual IP
     const response = await fetch(`https://ipinfo.io/${ip}?token=${token}`);
+    // const response = await fetch(`https://ipinfo.io/86.94.176.57?token=${token}`);
+
+    
 
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 

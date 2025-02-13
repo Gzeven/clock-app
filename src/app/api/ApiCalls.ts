@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 export const fetchRandomQuote = async () => {
   try {
     const response = await axios.get("https://quotes-api-self.vercel.app/quote");
@@ -26,6 +27,20 @@ export const fetchLocation = async () => {
   }
 };
 
+
+// export const fetchLocation = async () => {
+// const token = process.env.NEXT_PUBLIC_IPINFO_TOKEN;
+//   try {
+//     const response = await axios.get(`https://ipinfo.io/?token=${token}`);
+    
+//    console.log(response);
+   
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error fetching random quote:", error);
+//     return null; 
+//   }
+// };
 
 
 
