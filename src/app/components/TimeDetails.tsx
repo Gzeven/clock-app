@@ -54,7 +54,7 @@ const TimeDetails: React.FC<{ $isDaytime: boolean }> = ({ $isDaytime }) => {
         const oneDay = 1000 * 60 * 60 * 24;
         const dayOfYear = Math.floor(diff / oneDay);
 
-        const dayOfWeek = now.getDay();
+        const dayOfWeek = now.getDay() || 7;
 
         const firstDayOfYear = new Date(now.getFullYear(), 0, 1);
         const pastDays = (now.getTime() - firstDayOfYear.getTime()) / oneDay;
