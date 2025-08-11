@@ -92,7 +92,7 @@ const Quote: React.FC = () => {
           <p>{author}</p>
         </AuthorText>
       </div>
-      <Button onClick={getQuote}>
+      <Button onClick={getQuote} aria-label="Get new quote">
         <Image src={Refresh} alt="Get new quote" width="0" height="0" />
       </Button>
     </Container>
