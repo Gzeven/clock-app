@@ -70,6 +70,7 @@ const CurrentTime: React.FC<CurrentTimeProps> = ({ toggleComponents }) => {
       }
     };
 
+
   useEffect(() => {
 
     getCityandCountry();
@@ -94,7 +95,7 @@ const CurrentTime: React.FC<CurrentTimeProps> = ({ toggleComponents }) => {
     };
 
     updateTimeAndGreeting();
-    const intervalId = setInterval(updateTimeAndGreeting, 1000);
+    const intervalId = setInterval(updateTimeAndGreeting, 60 * 1000);
 
     return () => clearInterval(intervalId);
   }, []);
@@ -105,7 +106,7 @@ const CurrentTime: React.FC<CurrentTimeProps> = ({ toggleComponents }) => {
       <div>
         <GreetingContainer>
           {icon && <Image src={icon} alt="Icon" width={24} height={24} />}
-          <Greeting>{greeting}, its currently</Greeting>
+          <Greeting>{greeting}, it&apos;s currently</Greeting>
         </GreetingContainer>
         <TimeContainer>
           <Time>{currentTime}</Time>
