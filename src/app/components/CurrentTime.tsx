@@ -27,8 +27,24 @@ const GreetingContainer = styled.div`
   }
 `;
 
-const Greeting = styled.h4`
+const Greeting = styled.p`
   margin: 0;
+    font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 25px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--white);
+  @media (min-width: 768px) {
+    font-size: 1.125rem;
+    line-height: 28px;
+    letter-spacing: 3.6px;
+  }
+  @media (min-width: 1280px) {
+    font-size: 1.25rem;
+    line-height: 28px;
+    letter-spacing: 4px;
+  }
 `;
 
 const TimeContainer = styled.div`
@@ -36,8 +52,23 @@ const TimeContainer = styled.div`
   align-items: flex-end;
 `;
 
-const Time = styled.h1`
+const Time = styled.p`
   margin-right: 5px;
+   font-weight: 700;
+  font-size: 6.25rem;
+  line-height: 100px;
+  letter-spacing: -2.5px;
+  color: var(--white);
+  @media (min-width: 768px) {
+    font-size: 10.9375rem;
+    line-height: 175px;
+    letter-spacing: -4.375px;
+  }
+  @media (min-width: 1280px) {
+    font-size: 12.5rem;
+    line-height: 200px;
+    letter-spacing: -5px;
+  }
 `;
 
 const LocationContainer = styled.div`
@@ -112,8 +143,8 @@ const CurrentTime: React.FC<CurrentTimeProps> = ({ toggleComponents }) => {
           <Time>{currentTime}</Time>
         </TimeContainer>
         <LocationContainer>
-          {city && <h3>In {city},</h3>}
-          {countryCode && <h3>{countryCode}</h3>}
+          {city && <h2>In {city},</h2>}
+          {countryCode && <h2>{countryCode}</h2>}
         </LocationContainer>
       </div>
       <ToggleButton

@@ -35,6 +35,37 @@ const TimeDetailsContent = styled.div<{ $isDaytime: boolean }>`
   }
 `;
 
+const TimeDetailsContentTop = styled.div`
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  @media (min-width: 768px) {
+    font-size: 0.8125rem;
+    letter-spacing: 2.6px;
+  }
+  @media (min-width: 1280px) {
+    font-size: 0.9375rem;
+    letter-spacing: 3px;
+  }
+  
+`
+
+const TimeDetailsContentBottom = styled.div`
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 24px;
+  @media (min-width: 768px) {
+    font-size: 2.5rem;
+    line-height: 48px;
+  }
+  @media (min-width: 1280px) {
+    font-size: 3.5rem;
+    line-height: 68px;
+  }
+  
+`
+
 const TimeDetails: React.FC<{ $isDaytime: boolean }> = ({ $isDaytime }) => {
   const [timezone, setTimezone] = useState<string>("");
   const [dayOfYear, setDayOfYear] = useState<number>(0);
@@ -74,20 +105,20 @@ const TimeDetails: React.FC<{ $isDaytime: boolean }> = ({ $isDaytime }) => {
   return (
     <Container>
       <TimeDetailsContent $isDaytime={$isDaytime}>
-        <h2>Current TimeZone</h2>
-        <h6>{timezone}</h6>
+        <TimeDetailsContentTop>Current TimeZone</TimeDetailsContentTop>
+        <TimeDetailsContentBottom>{timezone}</TimeDetailsContentBottom>
       </TimeDetailsContent>
       <TimeDetailsContent $isDaytime={$isDaytime}>
-        <h2>Day of the Year</h2>
-        <h6>{dayOfYear}</h6>
+        <TimeDetailsContentTop>Day of the Year</TimeDetailsContentTop>
+        <TimeDetailsContentBottom>{dayOfYear}</TimeDetailsContentBottom>
       </TimeDetailsContent>
       <TimeDetailsContent $isDaytime={$isDaytime}>
-        <h2>Day of the Week</h2>
-        <h6>{dayOfWeek}</h6>
+        <TimeDetailsContentTop>Day of the Week</TimeDetailsContentTop>
+        <TimeDetailsContentBottom>{dayOfWeek}</TimeDetailsContentBottom>
       </TimeDetailsContent>
       <TimeDetailsContent $isDaytime={$isDaytime}>
-        <h2>Week Number</h2>
-        <h6>{weekNumber}</h6>
+        <TimeDetailsContentTop>Week Number</TimeDetailsContentTop>
+        <TimeDetailsContentBottom>{weekNumber}</TimeDetailsContentBottom>
       </TimeDetailsContent>
     </Container>
   );

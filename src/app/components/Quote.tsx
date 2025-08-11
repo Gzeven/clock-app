@@ -23,11 +23,27 @@ const Container = styled.div`
 
 const QuoteText = styled.div`
   max-width: 573px;
+  p {  font-size: 0.75rem;
+  line-height: 22px;
+  color: var(--white);
+  @media (min-width: 768px) {
+    font-size: 1.125rem;
+    line-height: 28px;
+  }
+}
 `;
 
 const AuthorText = styled.div`
-  font-weight: 700;
   margin-top: 0.5rem;
+  p {  font-size: 0.75rem;
+     font-weight: 700;
+  line-height: 22px;
+  color: var(--white);
+  @media (min-width: 768px) {
+    font-size: 1.125rem;
+    line-height: 28px;
+  }
+  }
 `;
 
 const Button = styled.button`
@@ -70,10 +86,10 @@ const Quote: React.FC = () => {
     <Container>
       <div>
         <QuoteText>
-          <h5>{quote}</h5>
+          <p>{quote}</p>
         </QuoteText>
         <AuthorText>
-          <h5>{author}</h5>
+          <p>{author}</p>
         </AuthorText>
       </div>
       <Button onClick={getQuote}>
